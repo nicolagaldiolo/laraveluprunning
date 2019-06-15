@@ -13,5 +13,6 @@ class ExampleSeeder extends Seeder
     {
         factory(App\Task::class, 'task_with_desc', 20)->create();
         factory(App\User::class, 20)->create();
+        factory(App\Dog::class, 30)->create();
     }
 }
