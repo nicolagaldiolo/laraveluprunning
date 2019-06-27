@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\BanDeleteMethod::class,
+            //\Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
         ],
 
         'api' => [
@@ -63,7 +64,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.custom' => \App\Http\Middleware\AuthCustom::class,
         'middlewareWithParams' => \App\Http\Middleware\MiddlewareWithParams::class,
-        'isAdmin' => \App\Http\Middleware\IsAdmin::class
+        'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+        // questi 2 middleware permettono di verificare gli Scopes(autorizzazioni) di un token
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     ];
 
     /**

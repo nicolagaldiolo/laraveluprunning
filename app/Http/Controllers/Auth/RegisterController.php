@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -69,6 +70,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+            //'api_token' => Str::random(60)
+
+            // aggiungo il campo api_token per l'autenticazione con token "semplice",
+            // dal momento però che abbiamo settato che il token viene "hashato" in config/auth (scelta facoltativa),
+            // non serve più generarlo al momento della registrazione ma abbiamo bisogno che il token passi dalla funzione hash,
+            // quindi occorre creare una rotta che prenda il token, lo passi dalla funzione hash e lo torni come json http://laraveluprunning.test/get_my_api_token
         ]);
     }
 

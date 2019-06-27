@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 /*
  * Autheticatable è la classe che rende il modello "Autenticabile", con il sistema di autenticazione di Laravel, (volendo si potrebbe usare qualsiasi altro modello basta che sia "autenticabile")
@@ -16,7 +17,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,
+
+        // SUPPORTO OAUTH Aggiunge la relazione Oauth Client e token related a ogni utente + fornire alcuni metodi di supporto al
+        // modello che consentono di ispezionare il token e gli ambiti dell'utente autenticato
+        HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +29,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'admin'
+        'name',
+        'email',
+        'password',
+        'admin',
+        'api_token' // aggiungo il campo api_token per lìautenticazione con token "semplice"
     ];
 
     /**
@@ -77,6 +86,11 @@ class User extends Authenticatable
     public function stars()
     {
         return $this->hasMany(Star::class);
+    }
+
+    public function friends()
+    {
+        return $this->hasMany(Friend::class);
     }
 
     public function conferences()

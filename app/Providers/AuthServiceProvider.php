@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Contact;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 /*
  * GATE E POLICIES
@@ -115,5 +117,36 @@ class AuthServiceProvider extends ServiceProvider
         if(Gate::denies('add-contact-to-group', [$contact, $group])){
             //abort(403);
         };
+
+
+        /*
+         * LARAVEL PASSPORT
+         */
+
+            /*
+             * REGISTRO PASSPORT OAUTH ROUTE
+             * Questo metodo registra le rotte necessarie per l'autenticazione, gestione accessi, token ecc.
+             */
+            Passport::routes();
+
+            /*
+             * DEFINISCO LA DURATA DEI TOKEN
+             * Setto la durata dei token,
+             */
+            //Passport::tokensExpireIn(Carbon::now()->addDays(15)); //(default 366, dopo occorre refresharlo)
+            //Passport::refreshTokensExpireIn(Carbon::now()->addDays(30)); //(default 366, dopo occorre riatunticarsi)
+
+            /*
+             * PASSPORT SCOPES
+             * Definisco gli scopes, ossia cosa può fare l'applicazione una volta ottenuto l'autorizzazione
+             * Qui vengono censiti tutti, ma è quando chiamiamo la rotta di autorizzazione che dichiariamo quali effettivamente usare: /oauth/authorize
+             */
+            Passport::tokensCan([
+                'list-clips' => 'List sound clips',
+                'add-delete-clips' => 'Add new and delete old sounds clips',
+                'admin-account' => 'Adminster account details'
+            ]);
+
+
     }
 }

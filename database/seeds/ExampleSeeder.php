@@ -12,7 +12,12 @@ class ExampleSeeder extends Seeder
     public function run()
     {
         factory(App\Task::class, 'task_with_desc', 20)->create();
-        factory(App\User::class, 20)->create();
-        factory(App\Dog::class, 30)->create();
+        $users = factory(App\User::class, 20)->create();
+
+
+
+        factory(App\Friend::class, 30)->create([
+            'user_id' => $users->pluck('id')->random()
+        ]);
     }
 }

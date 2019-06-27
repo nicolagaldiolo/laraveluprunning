@@ -11,6 +11,8 @@
 |
 */
 
+use GuzzleHttp\Client;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,11 +21,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/oauth2', function(){
+  return view('oauth2');
+})->middleware('auth');
+
 Route::get('blade-example', function () {
     $tasks = \App\Task::all();
     return view('bladeExample', compact('tasks'));
 });
-
 
 // RESOURCE CONTROLLER BINDING
 // Laravel associa in atuomatica tutte le rotte disponibili per questa risorsa (REST) con i metodi del controller e assegnerà anche i nomi appropriati
@@ -182,3 +187,27 @@ require __DIR__ . '/partials/response.php';
 require __DIR__ . '/partials/session.php';
 
 require __DIR__ . '/partials/validation.php';
+
+// Oauth2 Tokens from laravel session authentication (synchronizer tokens)
+// per gli altri metodi di autenticazione Oauth vedere rotte API
+require __DIR__ . '/partials/ouath2/synchronizer-tokens.php';
+
+
+/*
+ * SIMPLE API AUTH WITH BUILT-IN TOKEN
+ * Laravel fornisce un modo built-in per ottenere un token per ogni utente
+ * Il token risiede come plain-text salvato a db, e dal momento però che abbiamo settato che il token viene "hashato"
+ * in config/auth (scelta facoltativa), non serve più generarlo al momento della registrazione ma abbiamo bisogno che
+ * il token passi dalla funzione hash, quindi occorre creare una rotta che prenda il token, lo passi dalla funzione hash
+ * e lo torni come json
+ */
+
+Route::get('get_my_api_token', function(\Illuminate\Http\Request $request){
+    $token = \Illuminate\Support\Str::random(60);
+
+    $request->user()->forceFill([
+        'api_token' =>hash('sha256', $token)
+    ])->save();
+
+    return ['token' => $token];
+})->middleware('auth');

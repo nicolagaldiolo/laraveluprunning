@@ -41,10 +41,19 @@ return [
             'provider' => 'users',
         ],
 
+        // settings per passport
         'api' => [
-            'driver' => 'token',
+            //'driver' => 'token',
+            'driver' => 'passport', // informo laravel di usare passport per gestire l'autenticazione non i token built-in
             'provider' => 'users',
             'hash' => false,
+        ],
+
+        // settings per api token (autenticazione "semplice")
+        'api_token' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => true,
         ],
     ],
 
