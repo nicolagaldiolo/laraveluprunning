@@ -20,7 +20,7 @@ Route::get('notification', function(){
     //PUO ESSERE USATA DIRETTAMENTE SUL MODELLO NOTIFICABILE
     $user = \App\User::first();
     $workout = 'Fare un ora di corsa';
-    $when = \Carbon\Carbon::now()->addMinutes(30);
+    $when = \Carbon\Carbon::now()->addMinutes(0);
 
     $user->notify((new \App\Notifications\WorkoutAvailable($workout))->delay($when));
 
