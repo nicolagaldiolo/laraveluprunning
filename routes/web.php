@@ -158,36 +158,6 @@ Route::get('aborting', function(\Illuminate\Http\Request $request){
 });
 
 
-require __DIR__ . '/partials/artisan.php';
-
-require __DIR__ . '/partials/authentication.php';
-
-require __DIR__ . '/partials/container.php';
-
-require __DIR__ . '/partials/eloquent.php';
-
-require __DIR__ . '/partials/eloquentRelations.php';
-
-require __DIR__ . '/partials/errors.php';
-
-require __DIR__ . '/partials/facade.php';
-
-require __DIR__ . '/partials/gatePolicies.php';
-
-require __DIR__ . '/partials/middleware.php';
-
-require __DIR__ . '/partials/paginations.php';
-
-require __DIR__ . '/partials/redirect.php';
-
-require __DIR__ . '/partials/request.php';
-
-require __DIR__ . '/partials/response.php';
-
-require __DIR__ . '/partials/session.php';
-
-require __DIR__ . '/partials/validation.php';
-
 // Oauth2 Tokens from laravel session authentication (synchronizer tokens)
 // per gli altri metodi di autenticazione Oauth vedere rotte API
 require __DIR__ . '/partials/ouath2/synchronizer-tokens.php';
@@ -211,3 +181,42 @@ Route::get('get_my_api_token', function(\Illuminate\Http\Request $request){
 
     return ['token' => $token];
 })->middleware('auth');
+
+
+require __DIR__ . '/partials/artisan.php';
+
+require __DIR__ . '/partials/authentication.php';
+
+require __DIR__ . '/partials/cache.php';
+
+require __DIR__ . '/partials/container.php';
+
+require __DIR__ . '/partials/cookie.php';
+
+require __DIR__ . '/partials/eloquent.php';
+
+require __DIR__ . '/partials/eloquentRelations.php';
+
+require __DIR__ . '/partials/errors.php';
+
+require __DIR__ . '/partials/facade.php';
+
+require __DIR__ . '/partials/gatePolicies.php';
+
+require __DIR__ . '/partials/middleware.php';
+
+require __DIR__ . '/partials/paginations.php';
+
+require __DIR__ . '/partials/redirect.php';
+
+require __DIR__ . '/partials/request.php';
+
+require __DIR__ . '/partials/response.php';
+
+require __DIR__ . '/partials/scout.php';
+
+require __DIR__ . '/partials/session.php';
+
+require __DIR__ . '/partials/storage_filesystem.php';
+
+require __DIR__ . '/partials/validation.php';

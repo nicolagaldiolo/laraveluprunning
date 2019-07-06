@@ -48,3 +48,4 @@ Route::post('users', 'UserController@store')->name('users.store');
  * TEST MOCK Facades
  */
 Route::get('users', 'UserController@index')->name('users.index');
+Route::get('users/{user}', 'UserController@show')->name('users.show');

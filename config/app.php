@@ -1,5 +1,8 @@
 <?php
 
+use App\Providers\DropboxServiceProvider;
+use App\Providers\RouteServiceProvider;
+
 return [
 
     /*
@@ -174,6 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\CustomResponseServiceProvider::class
 
     ],
 

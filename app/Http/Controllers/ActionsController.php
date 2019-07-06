@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use http\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -16,10 +17,11 @@ class ActionsController extends Controller
      */
     public function create()
     {
-        dd(Auth::User());
-
+        //dd(Auth::User());
         //dd(\Illuminate\Support\Facades\Request::session());
-        return view('validations.create');
+
+        //dd(response()->cookie('provaCookie'));
+        return response()->view('validations.create')->cookie('provaCookie', 'pippo');
     }
 
     /**

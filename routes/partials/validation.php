@@ -25,6 +25,8 @@ Route::post('actions_manual', function (\Illuminate\Http\Request $request){
             ->withInput();
     }
 
+
+
     /*
     $action = new \App\Action;
     $action->title = $request->input('title');

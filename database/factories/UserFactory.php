@@ -22,7 +22,11 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-
+        'picture' => $faker->file(
+            storage_path('app/public/images'),
+            storage_path('app/public/tests'),
+            false
+        )
         //'api_token' => Str::random(60)
 
         // aggiungo il campo api_token per l'autenticazione con token "semplice",
