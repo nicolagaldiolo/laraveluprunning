@@ -17,7 +17,10 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable,
+    use
+        // Questo rende la nostra entità notificabile, occorre aggiungerlo a tutte le entità notificabili
+        // (mette a disposizione il metodo notify() da usare sul modello)
+        Notifiable,
 
         // SUPPORTO OAUTH Aggiunge la relazione Oauth Client e token related a ogni utente + fornire alcuni metodi di supporto al
         // modello che consentono di ispezionare il token e gli ambiti dell'utente autenticato
@@ -58,6 +61,27 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
     ];
+
+
+    /*
+     * METODI PER NOTIFICHE
+     */
+        // EMAIL PER LE NOTIFICHE
+        // Per le notifiche che inviano una mail la mail viene presa dalla proprietà mail del modello, ma può essere modificato
+        // il comportamento aggiungendo il metodo routeNotificationForMail() nel modello che torna l'indirizzo mail da prendere in considerazione per l'invio
+
+        //public function routeNotificationForMail()
+        //{
+        //    return 'pippo@pluto.com';
+        //}
+
+        public function routeNotificationForSlack($notification)
+        {
+            return env('SLACK_WEBHOOKURL',null);
+        }
+
+
+
 
     public function Tasks()
     {

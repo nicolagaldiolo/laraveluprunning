@@ -62,6 +62,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Global "To" Address
+    |--------------------------------------------------------------------------
+    |
+    | Per ogni email si può impostare un destinatario persoanlizzato ma se vogliamo sovrascrivere questa cosa e impostare
+    | un destinatario "GLOBALE" lo possiamo fare in config/email settando la chiave to:
+    |
+    */
+
+    //'to' => [
+    //    'address' => 'email@email.com',
+    //    'name' => 'Name Surname',
+    //],
+
+    /*
+    |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
     |--------------------------------------------------------------------------
     |
