@@ -29,6 +29,20 @@ Route::get('notification', function(){
     \Illuminate\Support\Facades\Notification::send($users, (new \App\Notifications\WorkoutAvailable($workout))->delay($when));
 });
 
+Route::get('notification_broadcasted', function(){
+
+    //PUO ESSERE USATA DIRETTAMENTE SUL MODELLO NOTIFICABILE
+    $user = Auth::user();
+    $workout = 'Fare un ora di corsa';
+    $when = \Carbon\Carbon::now()->addMinutes(0);
+
+    $user->notify((new \App\Notifications\WorkoutAvailable($workout))->delay($when));
+
+    //PUO ESSERE USATA CON LA FACADE CHE MI PERMETTE DI LANCIARE LA NOTIFICA SU PIù UTENTI CONTEMPORANEAMENTE
+    //$users = \App\User::all();
+    //\Illuminate\Support\Facades\Notification::send($users, (new \App\Notifications\WorkoutAvailable($workout))->delay($when));
+})->middleware('auth');
+
 // OTTENERE TUTTE LE NOTIFICHE SALVATE A DB
 Route::get('get_database_notification', function(){
 

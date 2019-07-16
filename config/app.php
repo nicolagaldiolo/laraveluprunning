@@ -174,7 +174,11 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+
+        // SCOMMENTARE App\Providers\BroadcastServiceProvider::class SE GLI EVENTI BROADCAST UTILIZZATI RICHIEDONO AUTENTICAZIONE
+        // infatti in questo file dichiariamo la logica con cui gli utenti possono accedere ai canali privati e presence
+        App\Providers\BroadcastServiceProvider::class,
+
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CustomResponseServiceProvider::class

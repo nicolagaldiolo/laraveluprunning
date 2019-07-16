@@ -18,7 +18,10 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
+
+    // Aggiungo a queste array tutte protette dal mifddleware csrfToken ma che per qualche motivo non voglio che venga fatto il controllo
     protected $except = [
-        'http://laraveluprunning.local/*'
+        //'http://laraveluprunning.test/*'
+        //'/broadcasting/auth'
     ];
 }

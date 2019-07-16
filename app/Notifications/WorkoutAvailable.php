@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -54,7 +55,8 @@ class WorkoutAvailable extends Notification implements ShouldQueue
         return [
             'mail',
             'database',
-            'slack'
+            'slack',
+            'broadcast'
         ];
     }
 
@@ -108,11 +110,11 @@ class WorkoutAvailable extends Notification implements ShouldQueue
     // NOTIFICHE BROADCUSTING (LARAVEL ECHO)
     public function toBroadcast($totifiable)
     {
-        return [
+        return new BroadcastMessage([
             'titolo_notifica' => $this->workout,
             'desc_notifica' => 'desc notifica',
             'tipo_notifica' => 'tipo notifica',
-        ];
+        ]);
     }
 
     // NOTIFICHE SMS (VIA NEXMO)
@@ -138,6 +140,7 @@ class WorkoutAvailable extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
+    // Questo metodo dovrebbe essere una sorta di fallback
     public function toArray($notifiable)
     {
         return [

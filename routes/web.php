@@ -201,6 +201,8 @@ require __DIR__ . '/partials/emails.php';
 
 require __DIR__ . '/partials/errors.php';
 
+require __DIR__ . '/partials/events.php';
+
 require __DIR__ . '/partials/facade.php';
 
 require __DIR__ . '/partials/gatePolicies.php';
@@ -210,6 +212,8 @@ require __DIR__ . '/partials/middleware.php';
 require __DIR__ . '/partials/notifications.php';
 
 require __DIR__ . '/partials/paginations.php';
+
+require __DIR__ . '/partials/queue.php';
 
 require __DIR__ . '/partials/redirect.php';
 

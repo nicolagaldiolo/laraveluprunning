@@ -7,8 +7,10 @@ use App\Http\ViewComposers\RecentTasksComposer;
 use App\Mail\UserMailer;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Mail\Mailer;
+use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
 use Symfony\Component\HttpKernel\Log\Logger;
@@ -255,6 +257,16 @@ class AppServiceProvider extends ServiceProvider //implements DeferrableProvider
         Contact::saved(function($contact){
             //logger("Contatto salvato, id: {$contact->id}");
         });
+
+
+        // METTO UN LISTENER CHE VIENE INVOCATO QUANDO UN JOB FALLISCE, OTTIMO SE VOGLIO LAVORARE A LIVELLO GLOBALE E
+        // INFORMARE IL TEAM CHE IL JOB è FALLITO. POSSO LAVORARE ANCHE A LIVELLO ATOMICO ALL'INTERNO DI OGNI JOB
+        Queue::failing(function (JobFailed $event) {
+            // $event->connectionName
+            // $event->job
+            // $event->exception
+        });
+
 
     }
 }
