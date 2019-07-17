@@ -35,6 +35,10 @@ Route::get('blade-example', function () {
 Route::resource('tasks', 'TasksController');
 Route::resource('contact', 'ContactController');
 
+Route::get('pippo/{param}', function ($param) {
+    dd($param);
+});
+
 Route::get('get', function () {})->name('get'); // accessibile con verbo GET
 Route::post('post', function () {}); // accessibile con verbo POST
 Route::put('put', function () {}); // accessibile con verbo PUT
@@ -206,6 +210,8 @@ require __DIR__ . '/partials/events.php';
 require __DIR__ . '/partials/facade.php';
 
 require __DIR__ . '/partials/gatePolicies.php';
+
+require __DIR__ . '/partials/helpers.php';
 
 require __DIR__ . '/partials/middleware.php';
 
