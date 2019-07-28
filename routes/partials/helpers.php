@@ -260,8 +260,6 @@ Route::get('helpers/collection', function(){
         return $item['roles'];
     }], true);
 
-    dd($group_by_multi);
-
     $numbers = collect([1,2,3]);
     // reverse() - inverte l'ordine di una collection
     // shuffle() - randomizza l'ordine di una collection
